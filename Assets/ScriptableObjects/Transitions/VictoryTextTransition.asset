@@ -70,7 +70,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   MoveOffSet: {x: 0, y: 0, z: 0}
-  MovePositionType: 2
+  MovePositionType: 0
   ScaleType: 0
   HaveScale: 1
   ScaleMultiplier: 1.5
@@ -89,6 +89,15 @@ MonoBehaviour:
         weightedMode: 0
         inWeight: 0
         outWeight: 0
+      - serializedVersion: 3
+        time: 0.12143445
+        value: 0.8509066
+        inSlope: 1.3345356
+        outSlope: 1.3345356
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
         value: 1
@@ -113,6 +122,15 @@ MonoBehaviour:
         weightedMode: 0
         inWeight: 0
         outWeight: 0
+      - serializedVersion: 3
+        time: 0.20639992
+        value: 0.8410323
+        inSlope: 1.4294665
+        outSlope: 1.4294665
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
         value: 1

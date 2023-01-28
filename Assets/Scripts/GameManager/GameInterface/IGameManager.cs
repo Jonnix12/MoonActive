@@ -1,5 +1,4 @@
-﻿using MoonActive.SequenceSystem;
-
+﻿
 namespace MoonActive.Managers
 {
     public interface IGameManager

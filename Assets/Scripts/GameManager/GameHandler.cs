@@ -27,7 +27,7 @@ namespace MoonActive.Managers
         {
             _boardHandler = new BoardHandler(grid,boardConfigSo);
             
-            _victoryAlgorithm = new VictoryAlgorithm(4);
+            _victoryAlgorithm = new VictoryAlgorithm(boardConfigSo.StreakCount);
             
             _players = PlayerFactory.GetPlayers(playersConfigSo.PlayerDatas.ToArray());
             _turnHandler = new TurnHandler(_players);

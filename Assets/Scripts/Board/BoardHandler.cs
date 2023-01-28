@@ -39,7 +39,6 @@ namespace MoonActive.Board
                 return false;
             }
             
-            //Debug.Log($"Spawn disk at raw: {newRaw} colum: {newColum}");
             _lastDropPoint = new DropPoint(newRaw, newColum);
             disk = _grid.Spawn(player.Disk, newColum, newRaw);
             return true;

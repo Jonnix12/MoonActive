@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace YonatanTools.Utilities.RectTransition
 {
-    public static class RectTransitionManager
+    public static class RectTransitionManager //A tool I built to make UI transitions using DoTween
+    //I had a small version problem with DoTween and there is a function that didn't work so I turned it off
 {
     #region PublicFunction
     
@@ -255,7 +256,7 @@ namespace YonatanTools.Utilities.RectTransition
         AnimationCurve animationCurveX = null,
         AnimationCurve animationCurveY = null, Action onComplete = null)
     {
-        //There were version problems, functions that do not exist in the current version(you need to issue an update)
+        //There were version problems, functions that do not exist in the current version
         
         // if (timeToTransition == 0)
         // {

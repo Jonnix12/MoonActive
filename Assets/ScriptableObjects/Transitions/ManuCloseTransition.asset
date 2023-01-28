@@ -69,8 +69,8 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  MoveOffSet: {x: 0, y: -1500, z: 0}
-  MovePositionType: 2
+  MoveOffSet: {x: 0, y: 0, z: 0}
+  MovePositionType: 0
   ScaleType: 0
   HaveScale: 0
   ScaleMultiplier: 0

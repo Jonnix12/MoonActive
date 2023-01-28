@@ -1,5 +1,4 @@
 ﻿using System;
-using MoonActive.GameManagers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,16 +11,19 @@ namespace MoonActive.Managers
     {
         public event Action OnGameEnded;
         public event Action OnAnimationCompleted;
-        
+
+        [SerializeField] private RectTransform _visctoryScreen;
         [SerializeField] private Text _text;
-        [SerializeField] private TransitionPackSO _transition;
         [SerializeField] private Button _restButton;
+        [Header("Transitions")]
+        [SerializeField] private RectTransform _midScreenPoint;
+        [SerializeField] private TransitionPackSO _transition;
 
         public void DoVictoryAnimation(string playerName = null)
         {
             _text.text = playerName == null ? $"Draw!" : $"{playerName} Won!";
             
-            _text.rectTransform.Transition(_transition,OnAnimationCompleted);
+            _text.rectTransform.Transition(_midScreenPoint,_transition,OnAnimationCompleted);
         }
         
         public void EndGame(string winPlayer)

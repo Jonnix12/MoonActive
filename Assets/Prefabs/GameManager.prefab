@@ -50,6 +50,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2f337e41ecc409548a3f3291c7522445, type: 2}
   _endGameHandler:
     _text: {fileID: 0}
-    _transition: {fileID: 11400000, guid: 0a744dbbcd66b4148a2d649be247d83c, type: 2}
     _restButton: {fileID: 0}
-  _mainMenu: {fileID: 0}
+    _midScreenPoint: {fileID: 0}
+    _transition: {fileID: 11400000, guid: 0a744dbbcd66b4148a2d649be247d83c, type: 2}
+  _manuHandler:
+    _manu: {fileID: 0}
+    _manuBotton: {fileID: 0}
+    _midScreenPoint: {fileID: 0}
+    _bottomScreenPoint: {fileID: 0}
+    _closeTransition: {fileID: 11400000, guid: 77b7e1a9db8bcc34abf17e44aa418b0d, type: 2}
+    _openTransition: {fileID: 11400000, guid: 5c1d1752960334e428d50f5d92a017f9, type: 2}

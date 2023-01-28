@@ -4,6 +4,10 @@ namespace MoonActive.SequenceSystem
 {
     public class SequenceHandler<T>
     {
+        /*
+         * It's a class that other class can Register to in order to get data,
+         * in our case I pass the IGameManager and thus players and if we need other objects could access the data.
+         */
         private List<ISequenceOperation<T>> _operations;
 
         public SequenceHandler()

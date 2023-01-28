@@ -10,11 +10,18 @@ namespace MoonActive.Managers
 {
     public class GameManager : MonoBehaviour, IGameManager
     {
+        /*
+         * This is my game manager. Here sits all the logic of the sequence that runs the game. It is the only object that is MonoBehaviour
+         */
         private static SequenceHandler<IGameManager> _sequenceHandler;
-        
+        /*
+         * The game has two configuration files,
+         * one for the players and one for the board
+         */
         [Header("Game Config")]
         [SerializeField] private BoardConfigSO _boardConfig;
         [SerializeField] private List<PlayersConfigSo> _playersConfig;
+        
         [Header("Scripts config")]
         [SerializeField] private EndGameHandler _endGameHandler;
         [SerializeField] private ManuHandler _manuHandler;
@@ -30,6 +37,7 @@ namespace MoonActive.Managers
         public void Awake()
         {
             _grid = FindObjectOfType<ConnectGameGrid>();
+            _manuHandler.Init();
             _manuHandler.StartOpenTransition();
         }
     
@@ -60,9 +68,10 @@ namespace MoonActive.Managers
                 
             _sequenceHandler.Register(operation);
         }
-    
+
         private void OnDestroy()
         {
+            _manuHandler.Dispose();
             _sequenceHandler.Reset();
             _gameHandler.OnConnectFound -= _endGameHandler.EndGame;
             _gameHandler.Dispose();
