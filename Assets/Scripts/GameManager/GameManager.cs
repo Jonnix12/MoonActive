@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using MoonActive.Connect4;
 using MoonActive.GameConfig;
-using MoonActive.GameManagers;
 using MoonActive.SequenceSystem;
 using UnityEngine;
 
@@ -39,6 +38,8 @@ namespace MoonActive.Managers
             _grid = FindObjectOfType<ConnectGameGrid>();
             _manuHandler.Init();
             _manuHandler.StartOpenTransition();
+
+            _endGameHandler.OnGameEnded += _manuHandler.TurnOffMenuButton;
         }
     
         public void SetPlayerConfigIndex(int configIndex)
@@ -71,6 +72,7 @@ namespace MoonActive.Managers
 
         private void OnDestroy()
         {
+            _endGameHandler.OnGameEnded -= _manuHandler.TurnOffMenuButton;
             _manuHandler.Dispose();
             _sequenceHandler.Reset();
             _gameHandler.OnConnectFound -= _endGameHandler.EndGame;

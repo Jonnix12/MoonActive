@@ -94,7 +94,7 @@ namespace MoonActive.Algorithms
                  * The outer loop goes through each possible combination
                  * by increasing the points by one each time a new combination is entered.
                  */
-                for (var i = startColum; i <= endColum - (_streakCount - 1); i++)
+                for (var startColumFactor = startColum; startColumFactor <= endColum - (_streakCount - 1); startColumFactor++)
                 {
                     int streakCount; //Number of times I was able to find a matching object in the sequence
                     /*
@@ -104,7 +104,7 @@ namespace MoonActive.Algorithms
                      */
                     for (streakCount = 0; streakCount < _streakCount; streakCount++)
                     {
-                        if (board[i + streakCount,newDiskRaw] != player)
+                        if (board[startColumFactor + streakCount,newDiskRaw] != player)
                         {
                             break;
                         }
@@ -142,13 +142,13 @@ namespace MoonActive.Algorithms
                     endRaw = newDiskRaw + _streakCount;
 
             
-                for (var i = startRaw; i < endRaw - 3; i++)
+                for (var startRawFactor = startRaw; startRawFactor < endRaw - 3; startRawFactor++)
                 {
                     int streakCount;
 
                     for (streakCount = 0; streakCount < _streakCount; streakCount++)
                     {
-                        if (board[newDiskColum,i + streakCount] != player)
+                        if (board[newDiskColum,startRawFactor + streakCount] != player)
                         {
                             break;
                         }
@@ -205,16 +205,16 @@ namespace MoonActive.Algorithms
                  * The concept of the test itself is very similar to the other tests,
                  * only the way I get my starting point is different
                  */
-                for (var i = 0; i < maxColums - 3; i++)
+                for (var jumpFactor = 0; jumpFactor < maxColums - 3; jumpFactor++)
                 {
                     int streakCount;
 
                     for (streakCount = 0; streakCount < _streakCount; streakCount++) 
                     {
-                        if (startColum - (i + streakCount) < 0 || startRaw + i + streakCount >= maxRows)
+                        if (startColum - (jumpFactor + streakCount) < 0 || startRaw + jumpFactor + streakCount >= maxRows)
                             return -1;
 
-                        if (board[startColum - (i + streakCount),startRaw + i + streakCount] != player) break;
+                        if (board[startColum - (jumpFactor + streakCount),startRaw + jumpFactor + streakCount] != player) break;
                     }
             
                     if (streakCount == _streakCount)
@@ -254,16 +254,16 @@ namespace MoonActive.Algorithms
                     }
                 }
         
-                for (var i = 0; i < maxColums - (_streakCount - 1); i++)
+                for (var jumpFactor = 0; jumpFactor < maxColums - (_streakCount - 1); jumpFactor++)
                 {
                     int streakCount;
 
                     for (streakCount = 0; streakCount < _streakCount; streakCount++)
                     {
-                        if (startColum + i + streakCount >= maxColums || startRaw + i + streakCount >= maxRows)
+                        if (startColum + jumpFactor + streakCount >= maxColums || startRaw + jumpFactor + streakCount >= maxRows)
                             return -1;
                         
-                        if (board[startColum + i + streakCount,startRaw + i + streakCount] != player)
+                        if (board[startColum + jumpFactor + streakCount,startRaw + jumpFactor + streakCount] != player)
                             break;
                     }
             

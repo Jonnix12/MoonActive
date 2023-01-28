@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using YonatanTools.Utilities.RectTransition;
 
-namespace MoonActive.GameManagers
+namespace MoonActive.Managers
 {
     [Serializable]
     public class ManuHandler : IDisposable
@@ -34,6 +34,11 @@ namespace MoonActive.GameManagers
         public void StartCloseTransition()
         {
             _manu.Transition(_bottomScreenPoint,_closeTransition,CloseManu);
+        }
+
+        public void TurnOffMenuButton()
+        {
+            _manuBotton.gameObject.SetActive(false);
         }
         
         private void OpenManu()
