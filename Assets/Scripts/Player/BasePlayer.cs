@@ -1,6 +1,6 @@
 using System;
 using MoonActive.Connect4;
-using MoonActive.Gamemanagers;
+using MoonActive.Managers;
 using MoonActive.SequenceSystem;
 
 namespace MoonActive.Players
@@ -24,18 +24,13 @@ namespace MoonActive.Players
         {
             _data = playerData;
             _disk = disk;
-            GameManager.Instance.Register(this);
+            GameManager.Register(this);
         }
     
         public abstract void ExecuteTask(IGameManager data);
 
         public abstract void PlayerStartTurn();
 
-        public virtual void PlayerUpdateTurn()
-        {
-        
-        }
-    
         public abstract void PlayerEndTurn();
 
         protected void CompletedAction()

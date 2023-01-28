@@ -26,6 +26,11 @@ namespace MoonActive.SequenceSystem
                 operation.ExecuteTask(data);
             }
         }
+
+        public void Reset()
+        {
+            _operations.Clear();
+        }
     }
 
     public interface ISequenceHandler<T>

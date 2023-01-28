@@ -6,9 +6,9 @@ using UnityEngine;
 
 namespace MoonActive.Factorys
 {
-    public class PlayerFactory
+    public static class PlayerFactory
     {
-        public BasePlayer GetPlayer(string name, int id, PlayerType playerType, DiskType diskType)
+        public static BasePlayer GetPlayer(string name, int id, PlayerType playerType, DiskType diskType)
        {
            switch (playerType)
            {
@@ -25,7 +25,7 @@ namespace MoonActive.Factorys
            return null;
        }
        
-       public List<BasePlayer> GetPlayers(params PlayerData[] playerDatas)
+       public static List<BasePlayer> GetPlayers(params PlayerData[] playerDatas)
        {
            List<BasePlayer> output = new List<BasePlayer>(playerDatas.Length);
            
@@ -37,7 +37,7 @@ namespace MoonActive.Factorys
            return output;
        }
 
-       private Disk GetDiskType(DiskType diskType)
+       private static Disk GetDiskType(DiskType diskType)
        {
            return diskType switch
            {

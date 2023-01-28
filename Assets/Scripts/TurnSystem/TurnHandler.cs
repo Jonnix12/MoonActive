@@ -48,7 +48,6 @@ namespace MoonActive.TurnSystem
             _turns[_currentTurnIndex].StartTurn();
         
             OnSetNewCurrentTurn?.Invoke();
-        
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using MoonActive.Connect4;
+using MoonActive.GameConfig;
 using MoonActive.Players;
 
 namespace MoonActive.Board
@@ -17,10 +18,10 @@ namespace MoonActive.Board
 
         public DropPoint LastDropPoint => _lastDropPoint;
         
-        public BoardHandler(IGrid grid)
+        public BoardHandler(IGrid grid,BoardConfigSO boardConfigSo)
         {
             _grid = grid;
-            _boardData = new BoardData(7, 6);
+            _boardData = new BoardData(boardConfigSo.ColumNumber, boardConfigSo.RawNumber);
             _grid.ColumnClicked += PlayerClick;
         }
 

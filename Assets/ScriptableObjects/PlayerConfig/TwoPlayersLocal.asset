@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: TwoPlayersLocal
   m_EditorClassIdentifier: 
   _playerDatas:
-  - _name: Yonatan
+  - _name: Blue Player
     _id: 1
     _playerType: 0
     _diskType: 0
-  - _name: Gay
+  - _name: Red Player
     _id: 2
     _playerType: 0
     _diskType: 1

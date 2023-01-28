@@ -1,6 +1,6 @@
 ﻿using MoonActive.Board;
 using MoonActive.Connect4;
-using MoonActive.Gamemanagers;
+using MoonActive.Managers;
 using UnityEngine;
 
 namespace MoonActive.Players
@@ -17,7 +17,7 @@ namespace MoonActive.Players
         
         public override void ExecuteTask(IGameManager data)
         {
-            _boardHandler = data.BoardHandler;
+            _boardHandler = data.GameHandler.BoardHandler;
         }
 
         public override void PlayerStartTurn()

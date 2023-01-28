@@ -402,4 +402,29 @@ public class VictoryAlgorithmTest
     }
 
     #endregion
+
+    #region Draw
+
+    [Test,Category("Diagonal Bottom Right To Top Left")]
+    public void VictoryAlgorithm_Draw()
+    {
+        _victoryAlgorithm.OverrideCurrentTopRaw(5);
+
+        int[,] board = new int[,]
+        {
+            {1,1,2,1,1,1},
+            {1,1,2,1,1,1},
+            {1,1,2,1,1,1},
+            {2,2,2,2,2,2},
+            {1,1,2,1,1,1},
+            {1,1,2,1,1,1},
+            {1,1,2,1,1,1}
+        };
+
+        var result = _victoryAlgorithm.CheckForVictory(board, 1, 5, 1);
+
+        Assert.AreEqual(0, result);
+    }
+
+    #endregion
 }

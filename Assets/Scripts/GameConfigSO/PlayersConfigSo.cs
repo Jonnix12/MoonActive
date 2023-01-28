@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace MoonActive.GameConfig
 {
-    [CreateAssetMenu(fileName = "PlayersConfigSo", menuName = "ScriptableObjects/PlayersConfigSo")]
+    [CreateAssetMenu(fileName = "PlayersConfigSo", menuName = "ScriptableObjects/GameConfig/PlayersConfigSo")]
     public class PlayersConfigSo : ScriptableObject
     {
         [SerializeField] private List<PlayerData> _playerDatas = new List<PlayerData>();

@@ -1,76 +1,72 @@
-﻿using System.Collections.Generic;
-using MoonActive.Algorithms;
-using MoonActive.Board;
+using System;
+using System.Collections.Generic;
 using MoonActive.Connect4;
-using MoonActive.Factorys;
-using MoonActive.Players;
+using MoonActive.GameConfig;
+using MoonActive.GameManagers;
 using MoonActive.SequenceSystem;
-using MoonActive.Singleton;
-using MoonActive.TurnSystem;
 using UnityEngine;
-using PlayersConfigSo = MoonActive.GameConfig.PlayersConfigSo;
 
-namespace MoonActive.Gamemanagers
+namespace MoonActive.Managers
 {
-    public class GameManager : MonoSingleton<ISequenceHandler<IGameManager>>, IGameManager , ISequenceHandler<IGameManager>
+    public class GameManager : MonoBehaviour, IGameManager
     {
-        [SerializeField] private PlayersConfigSo _playersConfigSo;
-
-        private SequenceHandler<IGameManager> _sequenceHandler;
-
-        private VictoryAlgorithm _victoryAlgorithm;
-        private PlayerFactory _playerFactory;
-        private TurnHandler _turnHandler;
-        private BoardHandler _boardHandler;
-
-        private List<BasePlayer> _players;
+        private static SequenceHandler<IGameManager> _sequenceHandler;
         
-        public IBoardHandler BoardHandler => _boardHandler;
-
-        private void Start()
+        [Header("Game Config")]
+        [SerializeField] private BoardConfigSO _boardConfig;
+        [SerializeField] private List<PlayersConfigSo> _playersConfig;
+        [Header("Scripts config")]
+        [SerializeField] private EndGameHandler _endGameHandler;
+        [SerializeField] private ManuHandler _manuHandler;
+        
+        private GameHandler _gameHandler;
+        
+        private IGrid _grid;
+        private int _playerConfigIndex;
+    
+        public IGameHandler GameHandler => _gameHandler;
+        public IEndGameHandler EndGameHandler => _endGameHandler;
+    
+        public void Awake()
         {
-            _playerFactory = new PlayerFactory();
-            _boardHandler = new BoardHandler(FindObjectOfType<ConnectGameGrid>());
-            _victoryAlgorithm = new VictoryAlgorithm(4);
-            
-            _players = _playerFactory.GetPlayers(_playersConfigSo.PlayerDatas.ToArray());
-            _turnHandler = new TurnHandler(_players);
-            
-            foreach (var player in _players)
+            _grid = FindObjectOfType<ConnectGameGrid>();
+            _manuHandler.StartOpenTransition();
+        }
+    
+        public void SetPlayerConfigIndex(int configIndex)
+        {
+            if (configIndex >= _playersConfig.Count || configIndex < 0)
             {
-                player.OnCompletedAction += MoveToNextTurn;
+                throw new Exception("Game manager: playerConfig index is out of range");
             }
-            
+    
+            _playerConfigIndex = configIndex;
+        }
+    
+        public void StartNewGame()
+        {
+            _gameHandler = new GameHandler(_grid,_playersConfig[_playerConfigIndex],_boardConfig);
             _sequenceHandler.StartAll(this);
+            _manuHandler.StartCloseTransition();
+    
+            _gameHandler.OnConnectFound += _endGameHandler.EndGame;
             
-            _turnHandler.SetCurrentTurn(0);
+            _gameHandler.StartGame();
         }
         
-        public void Register(ISequenceOperation<IGameManager> operation)
+        public static void Register(ISequenceOperation<IGameManager> operation)
         {
             _sequenceHandler ??= new SequenceHandler<IGameManager>();
-            
+                
             _sequenceHandler.Register(operation);
         }
-
-        private void MoveToNextTurn()
+    
+        private void OnDestroy()
         {
-            int result = _victoryAlgorithm.CheckForVictory(_boardHandler.Board, _boardHandler.LastDropPoint,
-                _turnHandler.CurrentBasePlayer.ID);
-
-            Debug.Log(result);
-            
-            _turnHandler.MoveToNextTurn();
+            _sequenceHandler.Reset();
+            _gameHandler.OnConnectFound -= _endGameHandler.EndGame;
+            _gameHandler.Dispose();
         }
-
-        public void Dispose()
-        {
-            foreach (var player in _players)
-            {
-                player.OnCompletedAction -= MoveToNextTurn;
-            }
-        }
-
-        
     }
 }
+

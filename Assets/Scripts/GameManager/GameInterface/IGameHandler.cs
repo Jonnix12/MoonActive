@@ -1,8 +1,8 @@
 ﻿using MoonActive.Board;
 
-namespace MoonActive.Gamemanagers
+namespace MoonActive.Managers
 {
-    public interface IGameManager
+    public interface IGameHandler
     {
         public IBoardHandler BoardHandler { get; }
     }
