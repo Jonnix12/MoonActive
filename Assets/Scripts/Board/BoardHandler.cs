@@ -25,12 +25,6 @@ namespace MoonActive.Board
             _grid.ColumnClicked += PlayerClick;
         }
 
-        private void PlayerClick(int colum)
-        {
-           OnClickBoard?.Invoke(colum);
-        }
-
-
         public bool InsertDisk(int newColum, BasePlayer player,out IDisk disk)
         {
             if (!_boardData.AddDisk(newColum, player.ID, out int newRaw))
@@ -43,5 +37,11 @@ namespace MoonActive.Board
             disk = _grid.Spawn(player.Disk, newColum, newRaw);
             return true;
         }
+        
+        private void PlayerClick(int colum)
+        {
+            OnClickBoard?.Invoke(colum);
+        }
+
     }
 }

@@ -5,23 +5,24 @@ namespace MoonActive.Algorithms
 {
     /*
      * I built an algorithm that instead of checking the entire board on each turn, I only check if the last move was the winning move.
-     * The algorithm works very simply, every time something puts a disk into the board I take its position and check every possible combination with the new point.
+     * The algorithm works in a simple way, every time someone puts a disk into the board I take its position and check every possible combination with the new point.
      * I divided the Algorithms into 5 parts:
      * Horizontal,
      * Vertical,
-     * DiagonalVictoryBottomRightToTopLeft,
-     * DiagonalVictoryBottomLeftToTopRight,
+     * Diagonal Bottom Right To Top Left,
+     * Diagonal Bottom Left To Top Right,
      * Draw
      *
-     * Every time I have to find my starting point and my ending point, the points are basically the minimum in each direction according to the streak number.
-     * The calculation for each starting point and end point is different for each test type.
-     * After I found the start and end points, I start running my tests, I check each time from the starting point and counting the number of streaks and if there was no win(meaning that not every object I passed belonged to the player I am checking now) I move on to the next starting point.
-     * If I went through all the possible combinations and there was no win, I move on to the next test.
-     * A victory is defined by the fact that if I managed to pass one check and all its objects belonged to the player who played the last turn.
+     * My board is represented by an ints matrix. the matrix is initialized to 0,
+     * and every time a player makes a move, the relevant coordinate updates to his ID
+     * If a player wins, I return his ID. If no one has won this round I return -1, and if there was a draw, I return 0.
+     * 
+     * Every turn I have to find the starting point of a possible combination and the ending point of the combination,
+     * each time a player makes a move, I am checking where the streak can be started (the streak may start in a different coordinate)
      */
     public class VictoryAlgorithm
     {
-        private readonly int _streakCount;
+        private readonly int _streakCount;//Number of elements in a row for victory
         private int _currentTopRaw = 0;
 
         public VictoryAlgorithm(int streakCount)
@@ -65,9 +66,7 @@ namespace MoonActive.Algorithms
                 return 0;
         
             return -1;
-            
-            //I split my tests into 5 local functions
-            
+
             int CheckForHorizontalVictory()
             {
                 int startColum;
@@ -83,7 +82,7 @@ namespace MoonActive.Algorithms
                     startColum = newDiskColum - (_streakCount - 1);
                 /*
                  * Finding my end point works on the same concept,
-                 * only that once I check that I haven't reached the maximum column
+                 * Only this time I'm adding instead of subtracting
                  */
                 if (newDiskColum + _streakCount - 1 >= maxColums - 1)
                     endColum = maxColums - 1;
@@ -109,16 +108,13 @@ namespace MoonActive.Algorithms
                             break;
                         }
                     }
-                    /*
-                     * After each coincidence check I check if my streak number matched the defined streak number,
-                     * if so I found a win and I return the number representing the player
-                     */
+                
                     if (streakCount == _streakCount)
                     {
                         return player;
                     }
                 }
-                //If I went through all the combinations and didn't find a win I return -1 from the current check
+                
                 return -1;
             }
         
@@ -126,7 +122,7 @@ namespace MoonActive.Algorithms
             {
                 /*
                  * The vertical test is just like the horizontal test
-                 * except that I find my start and end raw
+                 * except that I find my start and end raw points
                  */
                 int startRaw = 0;
                 int endRaw = 0;
@@ -142,7 +138,7 @@ namespace MoonActive.Algorithms
                     endRaw = newDiskRaw + _streakCount;
 
             
-                for (var startRawFactor = startRaw; startRawFactor < endRaw - 3; startRawFactor++)
+                for (var startRawFactor = startRaw; startRawFactor < endRaw - (_streakCount - 1); startRawFactor++)
                 {
                     int streakCount;
 
@@ -174,11 +170,8 @@ namespace MoonActive.Algorithms
                 int startColum = 0;
                 int startRaw = 0;
                 
-                /*
-                 * In order to find my starting point I had to use very simple graph mathematics,
-                 * with the help of subtractions and additions of the point where my new object is in I reached the my starting point.
-                 */
-                if (newDiskColum == maxColums - 1)//If I'm in my maximum column because I check that bottom right to top left I have no reason to change them and I can start from the point of the new object
+              
+                if (newDiskColum == maxColums - 1)//If I'm in my maximum column because I check from the bottom right to top left I have no reason to change them and I can start from the point of the new object
                 {
                     startColum = newDiskColum; 
                     startRaw = newDiskRaw;
@@ -188,7 +181,7 @@ namespace MoonActive.Algorithms
                     /*
                      * The calculation I do is a additions between the new row and the new column to find my starting point,
                      * in the event that the result is greater than the maximum column,
-                     * I perform a subtraction between the additions of the new row and the new column to the maximum column to find the remainder and that is my starting point
+                     * I perform a subtraction between the additions of the new row and the new column to the maximum column to find the remainder and that is my starting point raw
                      */
                     if ((newDiskRaw + newDiskColum) > maxColums - 1)
                     {
@@ -205,7 +198,7 @@ namespace MoonActive.Algorithms
                  * The concept of the test itself is very similar to the other tests,
                  * only the way I get my starting point is different
                  */
-                for (var jumpFactor = 0; jumpFactor < maxColums - 3; jumpFactor++)
+                for (var jumpFactor = 0; jumpFactor < maxColums - (_streakCount - 1); jumpFactor++)
                 {
                     int streakCount;
 

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _columNumber: 7
   _rawNumber: 6
+  _streakCount: 4

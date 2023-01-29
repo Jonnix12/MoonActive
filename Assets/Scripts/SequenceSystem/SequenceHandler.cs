@@ -36,9 +36,4 @@ namespace MoonActive.SequenceSystem
             _operations.Clear();
         }
     }
-
-    public interface ISequenceHandler<T>
-    {
-        void Register(ISequenceOperation<T> operation);
-    }
 }

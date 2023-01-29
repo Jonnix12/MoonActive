@@ -48,7 +48,9 @@ MonoBehaviour:
   _playersConfig:
   - {fileID: 11400000, guid: 275bae5b31d6f68458ea5d91911f49e5, type: 2}
   - {fileID: 11400000, guid: 2f337e41ecc409548a3f3291c7522445, type: 2}
+  - {fileID: 11400000, guid: 15882fce83f4dc7499ff16b951ea82d4, type: 2}
   _endGameHandler:
+    _visctoryScreen: {fileID: 0}
     _text: {fileID: 0}
     _restButton: {fileID: 0}
     _midScreenPoint: {fileID: 0}
@@ -56,6 +58,7 @@ MonoBehaviour:
   _manuHandler:
     _manu: {fileID: 0}
     _manuBotton: {fileID: 0}
+    _manuCloseBotton: {fileID: 0}
     _midScreenPoint: {fileID: 0}
     _bottomScreenPoint: {fileID: 0}
     _closeTransition: {fileID: 11400000, guid: 77b7e1a9db8bcc34abf17e44aa418b0d, type: 2}
